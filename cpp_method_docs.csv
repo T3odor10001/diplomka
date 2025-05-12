@@ -1,0 +1,122 @@
+MethodName,Documentation,Code
+get_greatest_common_divisor,"Computes the greatest common divisor of two numbers using the Euclidean algorithm.
+
+@param a The first number.
+@param b The second number.","int get_greatest_common_divisor(int a, int b) { while (b != 0) { int temp = b; b = a % b; a = temp; } return abs(a); }"
+calculate_pi,"Calculates the value of pi using the Bailey–Borwein–Plouffe formula.
+
+@param iterations The number of iterations to perform.","double calculate_pi(int iterations) { double sum = 0.0; for (int k = 0; k < iterations; ++k) { sum += (1 / pow(16, k)) * ((4 / (8 * k + 1)) - (2 / (8 * k + 4)) - (1 / (8 * k + 5)) - (1 / (8 * k + 6))); } return sum * 4; }"
+sort_array,"Sorts an array of integers in ascending order using the quicksort algorithm.
+
+@param arr The array to be sorted.","void sort_array(int* arr, int size) { if (size <= 1) return; int pivot = arr[size / 2]; int left = 0; int right = size - 1; while (left <= right) { while (arr[left] < pivot) ++left; while (arr[right] > pivot) --right; if (left <= right) { int temp = arr[left]; arr[left] = arr[right]; arr[right] = temp; ++left; --right; } } sort_array(arr, left); sort_array(arr + left + 1, right); }"
+maxValueCalculator,"Calculates the maximum value from a list of integers.
+
+*Time Complexity:* O(n)
+*Space Complexity:* O(1)","int maxValueCalculator(vector<int> numbers) {
+	int max_val = numbers[0];
+	for (int num : numbers) {
+		if (num > max_val) max_val = num;
+	}
+	return max_val;
+}"
+convertToTitle,"Converts a number to its corresponding title.
+
+*Example:* convertToTitle(1) returns 'One'.
+
+*Time Complexity:* O(n)
+*Space Complexity:* O(1)","string convertToTitle(int n) {
+	switch (n) {
+	case 1: return ""One"";
+	case 2: return ""Two"";
+	case 3: return ""Three"";
+	case 4: return ""Four"";
+	case 5: return ""Five"";
+	}
+	return ""Invalid Input"";
+}"
+mergeSortedArrays,"Merges two sorted arrays into a single sorted array.
+
+*Example:* mergeSortedArrays({1, 3, 5}, {2, 4, 6}) returns {1, 2, 3, 4, 5, 6}.
+
+*Time Complexity:* O(n + m)
+*Space Complexity:* O(n + m)","vector<int> mergeSortedArrays(vector<int>& arr1, vector<int>& arr2) {
+	vector<int> merged;
+	auto it1 = begin(arr1);
+	auto it2 = begin(arr2);
+	while (it1 != end(arr1) && it2 != end(arr2)) {
+		merged.push_back(min(*it1, *it2));
+		advance(it1, 1);
+		advance(it2, 1);
+	}
+	auto it3 = begin(arr1) + (it1 == end(arr1)?0:distance(begin(arr1), it1));
+	auto it4 = begin(arr2) + (it2 == end(arr2)?0:distance(begin(arr2), it2));
+	merge(it3, it4, end(merged), end(arr1)+distance(begin(arr1), it1), end(arr2)+distance(begin(arr2), it2));
+	return merged;
+}"
+maxElementInArray,Finds the maximum element in an array of integers.,"int maxElementInArray(int arr[], int size) { 
+    int max = arr[0]; 
+    for (int i = 1; i < size; i++) {
+        if (arr[i] > max) { 
+            max = arr[i];
+        }
+    } 
+    return max;
+}"
+convertToTitleCase,Converts a string to title case.,"string convertToTitleCase(string str) {
+    for (int i = 0; i < str.length(); i++) {
+        if (i == 0 || str[i - 1] == ' ') { 
+            str[i] = toupper(str[i]);
+        } else { 
+            str[i] = tolower(str[i]);
+        }
+    }
+    return str;
+}"
+findFirstOccurrence,Finds the index of the first occurrence of a character in a string.,"int findFirstOccurrence(string str, char c) { 
+    int i = 0; 
+    while (i < str.length()) {
+        if (str[i] == c) {
+            return i;
+        }
+        i++;
+    } 
+    return -1;
+}"
+max_element,/**\n * Finds the maximum element in a container.\n *\n * This function returns an iterator pointing to the first element of the sequence with value greater than or equal to all other elements.\n *\n * @param range The range of elements in which to search for the maximum.\n * @return An iterator pointing to the first element with the maximum value.\n */,"\ntemplate <typename T>\nT max_element(T begin, T end) {\n  if (begin == end)\n    return *begin;\n  \n  T max = *begin;\n  \n  for (++begin; begin != end; ++begin) {\n    if (*begin > max)\n      max = *begin;\n  }\n  \n  return max;\n}\n"
+swap,/**\n * Swaps the values of two objects.\n *\n * This function exchanges the contents of the first and second objects.\n *\n * @param a The object to swap with.\n * @param b The object to swap from.\n */,"\nvoid swap(int &a, int &b) {\n  int temp = a;\n  a = b;\n  b = temp;\n}\n"
+MaximalElement,/**\n     * Returns the maximal element in an array.\n     *\n     * \param arr The input array.\n     * \return The maximal element in the array.\n     */,"\nint MaximalElement(const int* arr, size_t n) {\n  if (n == 0)\n    return INT_MIN;\n\n  int max = arr[0];\n  for (size_t i = 1; i < n; ++i)\n    if (arr[i] > max)\n      max = arr[i];\n\n  return max;\n}\n"
+Fibonacci,/**\n     * Calculates the nth Fibonacci number.\n     *\n     * \param n The position of the Fibonacci number to calculate.\n     * \return The nth Fibonacci number.\n     */,"\nint Fibonacci(int n) {\n  if (n <= 1)\n    return n;\n\n  int a = 0, b = 1;\n  for (int i = 2; i <= n; ++i) {\n    int temp = a + b;\n    a = b;\n    b = temp;\n  }\n\n  return b;\n}\n"
+CountVowels,/**\n     * Counts the number of vowels in a string.\n     *\n     * \param str The input string.\n     * \return The count of vowels in the string.\n     */,\nint CountVowels(const char* str) {\n  int count = 0;\n  for (size_t i = 0; str[i]; ++i)\n    if ('a' <= str[i] && str[i] <= 'z')\n      ++count;\n\n  return count;\n}\n
+getGreatestCommonDivisor,"/**\n * This function calculates the greatest common divisor of two numbers.\n *\n * It uses the Euclidean algorithm to iteratively replace 'a' and 'b'\n * with 'b' and 'a % b' until 'b' becomes zero. At this point, 'a' is\n * the greatest common divisor of the original 'a' and 'b'.\n */\nint getGreatestCommonDivisor(int a, int b) {\n  while (b != 0) {\n    int temp = b;\n    b = a % b;\n    a = temp;\n  }\n  return a;\n}","int getGreatestCommonDivisor(int a, int b) { while (b != 0) { int temp = b; b = a % b; a = temp; } return a; }"
+printColors,"/**\n * This function prints out all colors of the rainbow.\n *\n * It uses a for loop to iterate over a list of color names, and then\n * prints each one on a new line.\n */\nvoid printColors() {\n  std::cout << \""\033[0;31m\"" << R\""(Red) \033[0m\n\"";\n  std::cout << \""\033[0;32m\"" << R\""(Green) \033[0m\n\"";\n  std::cout << \""\033[0;33m\"" << R\""(Yellow) \033[0m\n\"";\n  std::cout << \""\033[0;34m\"" << R\""(Blue) \033[0m\n\"";\n  std::cout << \""\033[0;35m\"" << R\""(Magenta) \033[0m\n\"";\n  std::cout << \""\033[0;36m\"" << R\""(Cyan) \033[0m\n\"";\n}","void printColors() { std::cout << \\033[0;31m\\""Red\\033[0m\\n\\033[0;32m\\""Green\\033[0m\\n\\033[0;33m\\""Yellow\\033[0m\\n\\033[0;34m\\""Blue\\033[0m\\n\\033[0;35m\\""Magenta\\033[0m\\n\\033[0;36m\\""Cyan\\033[0m\\n;}"
+calculateAverage,"/**\n * This function calculates the average of a list of numbers.\n *\n * It uses a for loop to iterate over the list, and then adds up all\n * the numbers. Finally, it divides by the total count of numbers\n * to get the average.\n */\ndouble calculateAverage(int numbers[], int size) {\n  double sum = 0;\n  for (int i = 0; i < size; i++) {\n    sum += numbers[i];\n  }\n  return sum / size;\n}","double calculateAverage(int numbers[], int size) { double sum = 0; for (int i = 0; i < size; i++) { sum += numbers[i]; } return sum / size;"
+findMaxElement,"/**\n * This function finds the maximum element in an array of integers.\n *\n * @param arr The input array of integers.\n * @return The maximum element in the array.\n */\nint findMaxElement(int arr[], int size) {\n    int max = arr[0];\n    for (int i = 1; i < size; i++) {\n        if (arr[i] > max) {\n            max = arr[i];\n        }\n    }\n    return max;\n}","int findMaxElement(int arr[], int size) { int max = arr[0]; for (int i = 1; i < size; i++) { if (arr[i] > max) { max = arr[i]; } } return max; }"
+findMaximumElement,"/**\n * Finds the maximum element in an array of integers.\n\n *\n * @param arr The input array.\n * @return The maximum element in the array.\n */\nint findMaximumElement(int arr[], int size) {\n    if (size == 0)\n        return INT_MIN;\n    int max = arr[0];\n    for (int i = 1; i < size; ++i) {\n        if (arr[i] > max)\n            max = arr[i];\n    }\n    return max;\n}","int findMaximumElement(int arr[], int size) { if (size == 0) return INT_MIN; int max = arr[0]; for (int i = 1; i < size; ++i) { if (arr[i] > max) max = arr[i]; } return max; }"
+maxSubArraySum,"Returns the maximum contiguous sum of an array \nExample: [2, -3, 4, -1, 5] \np = 6\n","int maxSubArraySum(int arr[], int size) {
+    int max_so_far = INT_MIN;
+    int max_ending_here = 0;
+
+    for (int i = 0; i < size; i++) {
+        max_ending_here = max_ending_here + arr[i];\n        if (max_so_far < max_ending_here) {\n            max_so_far = max_ending_here;\n        }
+    }
+
+    return max_so_far;
+}"
+isPerfectSquare,"Checks if a number is a perfect square \np = n * (n + 1) / 2 \npos: 4, 16, 25 \nneg: -3, -10\np: True, False\n","bool isPerfectSquare(int n) {
+    double sqrt_n = sqrt(n);
+
+    if (sqrt_n == floor(sqrt_n)) {\n        return true;\n    }
+    return false;
+}"
+reversePrefix,"Reverses all characters in a string before the first occurrence of a given prefix \np: &quot;abx&quot;, prefix = &quot;x&quot; \nn = &quot;ba&quot;, \
+prefix = &quot;x&quot; \nresult = &quot;abx&quot;, \
+prefix = &quot;x&quot; \nn: False, \nprefix = &quot;a&quot; \n","bool reversePrefix(string s, string prefix) {
+    int idx = s.find(prefix);
+
+    if (idx == string::npos) {\n        return false;
+    }
+
+    reverse(s.begin() + 0, s.begin() + idx);
+    reverse(s.begin() + idx + 1, s.end());\n
+    return true;
+}"

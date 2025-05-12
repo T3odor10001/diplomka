@@ -1,0 +1,341 @@
+method_name,documentation,code
+calculateAverage,Calculates the average of elements in a vector. Param: numbers - vector of integers. Return: average as a float.,float calculateAverage(const std::vector<int>& numbers) { int sum = 0; for (int num : numbers) sum += num; return static_cast<float>(sum) / numbers.size(); }
+reverseString,Reverses a given string. Param: str - the input string. Return: reversed string.,"std::string reverseString(std::string str) { std::reverse(str.begin(), str.end()); return str; }"
+isEven,"Checks if a number is even. Param: num - the number to check. Return: true if even, false otherwise.",bool isEven(int num) { return num % 2 == 0; }
+factorial,Calculates the factorial of a number. Param: n - input number. Return: factorial result.,int factorial(int n) { return (n <= 1) ? 1 : n * factorial(n - 1); }
+isPrime,"Checks if a number is prime. Param: num - number to check. Return: true if prime, false otherwise.",bool isPrime(int num) { if (num <= 1) return false; for (int i = 2; i * i <= num; ++i) if (num % i == 0) return false; return true; }
+fibonacci,Calculates nth Fibonacci number. Param: n - index. Return: nth Fibonacci number.,int fibonacci(int n) { if (n <= 1) return n; return fibonacci(n - 1) + fibonacci(n - 2); }
+swap,Swaps two integers. Param: a and b - references to integers. Return: none.,"void swap(int& a, int& b) { int temp = a; a = b; b = temp; }"
+toUpperCase,Converts a string to uppercase. Param: str - input string. Return: uppercase version.,std::string toUpperCase(std::string str) { for (char& c : str) c = toupper(c); return str; }
+toLowerCase,Converts a string to lowercase. Param: str - input string. Return: lowercase version.,std::string toLowerCase(std::string str) { for (char& c : str) c = tolower(c); return str; }
+countOccurrences,"Counts occurrences of a character in a string. Param: str - string, ch - character. Return: count.","int countOccurrences(const std::string& str, char ch) { return std::count(str.begin(), str.end(), ch); }"
+gcd,Computes greatest common divisor. Param: a and b - integers. Return: GCD.,"int gcd(int a, int b) { return b == 0 ? a : gcd(b, a % b); }"
+lcm,Computes least common multiple. Param: a and b - integers. Return: LCM.,"int lcm(int a, int b) { return a * b / gcd(a, b); }"
+removeSpaces,Removes spaces from a string. Param: str - input string. Return: string without spaces.,std::string removeSpaces(const std::string& str) { std::string result; for (char c : str) if (c != ' ') result += c; return result; }
+charFrequency,Counts frequency of characters. Param: str - string. Return: map of characters and counts.,"std::map<char, int> charFrequency(const std::string& str) { std::map<char, int> freq; for (char c : str) ++freq[c]; return freq; }"
+isLeapYear,Checks if a year is a leap year. Param: year - integer. Return: true if leap year.,bool isLeapYear(int year) { return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0); }
+sumArray,"Sums elements in an array. Param: arr - array, size - length. Return: sum of elements.","int sumArray(const int arr[], int size) { int sum = 0; for (int i = 0; i < size; ++i) sum += arr[i]; return sum; }"
+averageArray,"Calculates average of array elements. Param: arr - array, size - length. Return: average.","double averageArray(const int arr[], int size) { return static_cast<double>(sumArray(arr, size)) / size; }"
+printVector,Prints elements of a vector. Param: vec - vector of ints. Return: none.,void printVector(const std::vector<int>& vec) { for (int x : vec) std::cout << x << ' '; }
+maxInVector,Finds max element in a vector. Param: vec - vector of ints. Return: max value.,"int maxInVector(const std::vector<int>& vec) { return *std::max_element(vec.begin(), vec.end()); }"
+minInVector,Finds min element in a vector. Param: vec - vector of ints. Return: min value.,"int minInVector(const std::vector<int>& vec) { return *std::min_element(vec.begin(), vec.end()); }"
+square,Returns the square of an integer. Param: x - the number. Return: square of x.,int square(int x) { return x * x; }
+cube,Returns the cube of an integer. Param: x - the number. Return: cube of x.,int cube(int x) { return x * x * x; }
+absValue,Returns the absolute value of an integer. Param: x - the number. Return: absolute value.,int absValue(int x) { return x < 0 ? -x : x; }
+isPositive,Checks if a number is positive. Param: x - the number. Return: true if positive.,bool isPositive(int x) { return x > 0; }
+isNegative,Checks if a number is negative. Param: x - the number. Return: true if negative.,bool isNegative(int x) { return x < 0; }
+sumRange,"Sums numbers in a range. Param: a - start, b - end. Return: sum of range.","int sumRange(int a, int b) { int sum = 0; for (int i = a; i <= b; ++i) sum += i; return sum; }"
+isDivisible,"Checks divisibility of two numbers. Param: a, b - integers. Return: true if a divisible by b.","bool isDivisible(int a, int b) { return b != 0 && a % b == 0; }"
+getLastElement,Gets the last element of a vector. Param: vec - vector of ints. Return: last element.,int getLastElement(const std::vector<int>& vec) { return vec.back(); }
+clearVector,Clears all elements in a vector. Param: vec - vector of ints. Return: none.,void clearVector(std::vector<int>& vec) { vec.clear(); }
+hasElement,"Checks if vector contains a value. Param: vec - vector, val - value. Return: true if found.","bool hasElement(const std::vector<int>& vec, int val) { return std::find(vec.begin(), vec.end(), val) != vec.end(); }"
+sortVectorAsc,Sorts a vector in ascending order. Param: vec - vector. Return: none.,"void sortVectorAsc(std::vector<int>& vec) { std::sort(vec.begin(), vec.end()); }"
+sortVectorDesc,Sorts a vector in descending order. Param: vec - vector. Return: none.,"void sortVectorDesc(std::vector<int>& vec) { std::sort(vec.begin(), vec.end(), std::greater<int>()); }"
+removeDuplicates,Removes duplicates from a vector. Param: vec - vector. Return: vector without duplicates.,"std::vector<int> removeDuplicates(std::vector<int> vec) { std::sort(vec.begin(), vec.end()); vec.erase(std::unique(vec.begin(), vec.end()), vec.end()); return vec; }"
+vectorSum,Calculates sum of vector elements. Param: vec - vector. Return: sum.,"int vectorSum(const std::vector<int>& vec) { return std::accumulate(vec.begin(), vec.end(), 0); }"
+reverseVector,Reverses a vector. Param: vec - vector. Return: none.,"void reverseVector(std::vector<int>& vec) { std::reverse(vec.begin(), vec.end()); }"
+multiplyArray,"Multiplies all elements in array. Param: arr - array, size - length. Return: product.","int multiplyArray(const int arr[], int size) { int result = 1; for (int i = 0; i < size; ++i) result *= arr[i]; return result; }"
+indexOf,"Finds index of element in array. Param: arr - array, size - length, val - target. Return: index or -1.","int indexOf(const int arr[], int size, int val) { for (int i = 0; i < size; ++i) if (arr[i] == val) return i; return -1; }"
+isSorted,"Checks if array is sorted ascending. Param: arr - array, size - length. Return: true if sorted.","bool isSorted(const int arr[], int size) { for (int i = 1; i < size; ++i) if (arr[i] < arr[i - 1]) return false; return true; }"
+countEven,"Counts even numbers in array. Param: arr - array, size - length. Return: count.","int countEven(const int arr[], int size) { int count = 0; for (int i = 0; i < size; ++i) if (arr[i] % 2 == 0) ++count; return count; }"
+countOdd,"Counts odd numbers in array. Param: arr - array, size - length. Return: count.","int countOdd(const int arr[], int size) { int count = 0; for (int i = 0; i < size; ++i) if (arr[i] % 2 != 0) ++count; return count; }"
+calculatePower1,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower1(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits2,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits2(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome3,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome3(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits4,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits4(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM5,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM5(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower6,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower6(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits7,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits7(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome8,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome8(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits9,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits9(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM10,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM10(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower11,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower11(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits12,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits12(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome13,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome13(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits14,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits14(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM15,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM15(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower16,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower16(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits17,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits17(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome18,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome18(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits19,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits19(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM20,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM20(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower21,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower21(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits22,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits22(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome23,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome23(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits24,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits24(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM25,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM25(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower26,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower26(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits27,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits27(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome28,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome28(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits29,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits29(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM30,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM30(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower31,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower31(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits32,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits32(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome33,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome33(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits34,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits34(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM35,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM35(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower36,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower36(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits37,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits37(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome38,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome38(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits39,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits39(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM40,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM40(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower41,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower41(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits42,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits42(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome43,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome43(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits44,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits44(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM45,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM45(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower46,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower46(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits47,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits47(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome48,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome48(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits49,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits49(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM50,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM50(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower51,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower51(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits52,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits52(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome53,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome53(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits54,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits54(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM55,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM55(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+calculatePower56,"Calculates a raised to the power of b. Parameters: base a, exponent b. Returns: a^b.","int calculatePower56(int a, int b) { int result = 1; for (int i = 0; i < b; ++i) result *= a; return result; }"
+sumDigits57,Calculates the sum of digits of an integer n. Parameter: n. Returns: sum of digits.,int sumDigits57(int n) { int sum = 0; while (n != 0) { sum += n % 10; n /= 10; } return sum; }
+isPalindrome58,Checks if a given integer is a palindrome. Parameter: n. Returns: true if palindrome.,"bool isPalindrome58(int n) { int orig = n, rev = 0; while (n > 0) { rev = rev * 10 + n % 10; n /= 10; } return orig == rev; }"
+countBits59,Counts the number of 1 bits in binary representation. Parameter: n. Returns: count of 1s.,int countBits59(int n) { int count = 0; while (n) { count += n & 1; n >>= 1; } return count; }
+findLCM60,"Finds the least common multiple of a and b. Parameters: a, b. Returns: LCM of a and b.","int findLCM60(int a, int b) { int gcd = [] (int x, int y) { while (y) { int t = y; y = x % y; x = t; } return x; }(a, b); return a * b / gcd; }"
+longestCommonPrefix1,Finds the longest common prefix among an array of strings. Parameters: strs. Returns: common prefix string.,"std::string longestCommonPrefix1(std::vector<std::string>& strs) {
+    if (strs.empty()) return """";
+    std::string prefix = strs[0];
+    for (size_t i = 1; i < strs.size(); ++i) {
+        while (strs[i].find(prefix) != 0) {
+            prefix = prefix.substr(0, prefix.length() - 1);
+            if (prefix.empty()) return """";
+        }
+    }
+    return prefix;
+}"
+binarySearchRecursive2,"Performs binary search recursively. Parameters: arr, left, right, target. Returns: index or -1.","int binarySearchRecursive2(int arr[], int left, int right, int target) {
+    if (left > right) return -1;
+    int mid = left + (right - left) / 2;
+    if (arr[mid] == target) return mid;
+    if (arr[mid] > target)
+        return binarySearchRecursive2(arr, left, mid - 1, target);
+    return binarySearchRecursive2(arr, mid + 1, right, target);
+}"
+quickSort3,"Sorts an array using quicksort. Parameters: arr, low, high. Returns: none.","void quickSort3(int arr[], int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                std::swap(arr[i], arr[j]);
+            }
+        }
+        std::swap(arr[i + 1], arr[high]);
+        int pi = i + 1;
+        quickSort3(arr, low, pi - 1);
+        quickSort3(arr, pi + 1, high);
+    }
+}"
+mergeSortedArrays4,"Merges two sorted arrays into one sorted array. Parameters: arr1, size1, arr2, size2. Returns: merged sorted array.","std::vector<int> mergeSortedArrays4(const int arr1[], int size1, const int arr2[], int size2) {
+    std::vector<int> result;
+    int i = 0, j = 0;
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j])
+            result.push_back(arr1[i++]);
+        else
+            result.push_back(arr2[j++]);
+    }
+    while (i < size1) result.push_back(arr1[i++]);
+    while (j < size2) result.push_back(arr2[j++]);
+    return result;
+}"
+longestCommonPrefix5,Finds the longest common prefix among an array of strings. Parameters: strs. Returns: common prefix string.,"std::string longestCommonPrefix5(std::vector<std::string>& strs) {
+    if (strs.empty()) return """";
+    std::string prefix = strs[0];
+    for (size_t i = 1; i < strs.size(); ++i) {
+        while (strs[i].find(prefix) != 0) {
+            prefix = prefix.substr(0, prefix.length() - 1);
+            if (prefix.empty()) return """";
+        }
+    }
+    return prefix;
+}"
+binarySearchRecursive6,"Performs binary search recursively. Parameters: arr, left, right, target. Returns: index or -1.","int binarySearchRecursive6(int arr[], int left, int right, int target) {
+    if (left > right) return -1;
+    int mid = left + (right - left) / 2;
+    if (arr[mid] == target) return mid;
+    if (arr[mid] > target)
+        return binarySearchRecursive6(arr, left, mid - 1, target);
+    return binarySearchRecursive6(arr, mid + 1, right, target);
+}"
+quickSort7,"Sorts an array using quicksort. Parameters: arr, low, high. Returns: none.","void quickSort7(int arr[], int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                std::swap(arr[i], arr[j]);
+            }
+        }
+        std::swap(arr[i + 1], arr[high]);
+        int pi = i + 1;
+        quickSort7(arr, low, pi - 1);
+        quickSort7(arr, pi + 1, high);
+    }
+}"
+mergeSortedArrays8,"Merges two sorted arrays into one sorted array. Parameters: arr1, size1, arr2, size2. Returns: merged sorted array.","std::vector<int> mergeSortedArrays8(const int arr1[], int size1, const int arr2[], int size2) {
+    std::vector<int> result;
+    int i = 0, j = 0;
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j])
+            result.push_back(arr1[i++]);
+        else
+            result.push_back(arr2[j++]);
+    }
+    while (i < size1) result.push_back(arr1[i++]);
+    while (j < size2) result.push_back(arr2[j++]);
+    return result;
+}"
+longestCommonPrefix9,Finds the longest common prefix among an array of strings. Parameters: strs. Returns: common prefix string.,"std::string longestCommonPrefix9(std::vector<std::string>& strs) {
+    if (strs.empty()) return """";
+    std::string prefix = strs[0];
+    for (size_t i = 1; i < strs.size(); ++i) {
+        while (strs[i].find(prefix) != 0) {
+            prefix = prefix.substr(0, prefix.length() - 1);
+            if (prefix.empty()) return """";
+        }
+    }
+    return prefix;
+}"
+binarySearchRecursive10,"Performs binary search recursively. Parameters: arr, left, right, target. Returns: index or -1.","int binarySearchRecursive10(int arr[], int left, int right, int target) {
+    if (left > right) return -1;
+    int mid = left + (right - left) / 2;
+    if (arr[mid] == target) return mid;
+    if (arr[mid] > target)
+        return binarySearchRecursive10(arr, left, mid - 1, target);
+    return binarySearchRecursive10(arr, mid + 1, right, target);
+}"
+quickSort11,"Sorts an array using quicksort. Parameters: arr, low, high. Returns: none.","void quickSort11(int arr[], int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                std::swap(arr[i], arr[j]);
+            }
+        }
+        std::swap(arr[i + 1], arr[high]);
+        int pi = i + 1;
+        quickSort11(arr, low, pi - 1);
+        quickSort11(arr, pi + 1, high);
+    }
+}"
+mergeSortedArrays12,"Merges two sorted arrays into one sorted array. Parameters: arr1, size1, arr2, size2. Returns: merged sorted array.","std::vector<int> mergeSortedArrays12(const int arr1[], int size1, const int arr2[], int size2) {
+    std::vector<int> result;
+    int i = 0, j = 0;
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j])
+            result.push_back(arr1[i++]);
+        else
+            result.push_back(arr2[j++]);
+    }
+    while (i < size1) result.push_back(arr1[i++]);
+    while (j < size2) result.push_back(arr2[j++]);
+    return result;
+}"
+longestCommonPrefix13,Finds the longest common prefix among an array of strings. Parameters: strs. Returns: common prefix string.,"std::string longestCommonPrefix13(std::vector<std::string>& strs) {
+    if (strs.empty()) return """";
+    std::string prefix = strs[0];
+    for (size_t i = 1; i < strs.size(); ++i) {
+        while (strs[i].find(prefix) != 0) {
+            prefix = prefix.substr(0, prefix.length() - 1);
+            if (prefix.empty()) return """";
+        }
+    }
+    return prefix;
+}"
+binarySearchRecursive14,"Performs binary search recursively. Parameters: arr, left, right, target. Returns: index or -1.","int binarySearchRecursive14(int arr[], int left, int right, int target) {
+    if (left > right) return -1;
+    int mid = left + (right - left) / 2;
+    if (arr[mid] == target) return mid;
+    if (arr[mid] > target)
+        return binarySearchRecursive14(arr, left, mid - 1, target);
+    return binarySearchRecursive14(arr, mid + 1, right, target);
+}"
+quickSort15,"Sorts an array using quicksort. Parameters: arr, low, high. Returns: none.","void quickSort15(int arr[], int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                std::swap(arr[i], arr[j]);
+            }
+        }
+        std::swap(arr[i + 1], arr[high]);
+        int pi = i + 1;
+        quickSort15(arr, low, pi - 1);
+        quickSort15(arr, pi + 1, high);
+    }
+}"
+mergeSortedArrays16,"Merges two sorted arrays into one sorted array. Parameters: arr1, size1, arr2, size2. Returns: merged sorted array.","std::vector<int> mergeSortedArrays16(const int arr1[], int size1, const int arr2[], int size2) {
+    std::vector<int> result;
+    int i = 0, j = 0;
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j])
+            result.push_back(arr1[i++]);
+        else
+            result.push_back(arr2[j++]);
+    }
+    while (i < size1) result.push_back(arr1[i++]);
+    while (j < size2) result.push_back(arr2[j++]);
+    return result;
+}"
+longestCommonPrefix17,Finds the longest common prefix among an array of strings. Parameters: strs. Returns: common prefix string.,"std::string longestCommonPrefix17(std::vector<std::string>& strs) {
+    if (strs.empty()) return """";
+    std::string prefix = strs[0];
+    for (size_t i = 1; i < strs.size(); ++i) {
+        while (strs[i].find(prefix) != 0) {
+            prefix = prefix.substr(0, prefix.length() - 1);
+            if (prefix.empty()) return """";
+        }
+    }
+    return prefix;
+}"
+binarySearchRecursive18,"Performs binary search recursively. Parameters: arr, left, right, target. Returns: index or -1.","int binarySearchRecursive18(int arr[], int left, int right, int target) {
+    if (left > right) return -1;
+    int mid = left + (right - left) / 2;
+    if (arr[mid] == target) return mid;
+    if (arr[mid] > target)
+        return binarySearchRecursive18(arr, left, mid - 1, target);
+    return binarySearchRecursive18(arr, mid + 1, right, target);
+}"
+quickSort19,"Sorts an array using quicksort. Parameters: arr, low, high. Returns: none.","void quickSort19(int arr[], int low, int high) {
+    if (low < high) {
+        int pivot = arr[high];
+        int i = (low - 1);
+        for (int j = low; j < high; j++) {
+            if (arr[j] < pivot) {
+                i++;
+                std::swap(arr[i], arr[j]);
+            }
+        }
+        std::swap(arr[i + 1], arr[high]);
+        int pi = i + 1;
+        quickSort19(arr, low, pi - 1);
+        quickSort19(arr, pi + 1, high);
+    }
+}"
+mergeSortedArrays20,"Merges two sorted arrays into one sorted array. Parameters: arr1, size1, arr2, size2. Returns: merged sorted array.","std::vector<int> mergeSortedArrays20(const int arr1[], int size1, const int arr2[], int size2) {
+    std::vector<int> result;
+    int i = 0, j = 0;
+    while (i < size1 && j < size2) {
+        if (arr1[i] < arr2[j])
+            result.push_back(arr1[i++]);
+        else
+            result.push_back(arr2[j++]);
+    }
+    while (i < size1) result.push_back(arr1[i++]);
+    while (j < size2) result.push_back(arr2[j++]);
+    return result;
+}"

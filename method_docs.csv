@@ -1,0 +1,11 @@
+Method,Docstring
+def printHello():,"Prints 'Hello, World!' to the console."
+def getInput(prompt):,Asks a question and returns the user's input as a string.
+def getLength(list):,Returns the number of elements in the provided list.
+def calculateTotal(numbers):,Calculates the sum of numbers in the list and returns it.
+def filterEvenNumbers(numbers):,Filters out even numbers from a list and returns them.
+def reverseList(list):,Reverses the order of elements in the list and returns it.
+def removeDuplicateElements(list):,Removes duplicate values from the list and returns the new list.
+def capitalizeWords(sentence):,Converts all words in the sentence to uppercase.
+def greetUser(name):,Greets the user by name and returns the greeting.
+def analyzeText(text):,Analyzes the text for common words and their counts.

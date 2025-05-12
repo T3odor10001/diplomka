@@ -1,0 +1,78 @@
+[
+  {
+    "method_name": "calculateMedian",
+    "documentation": """
+    Calculates the median of a given list of numbers.
+
+    Args:
+        numbers (std::vector<int>): A vector of integers to calculate the median from.
+
+    Returns:
+        int: The median value of the input numbers.
+    """,
+    "code": """
+    /**
+     * Calculates the median of a given list of numbers.
+     *
+     * @param numbers A vector of integers to calculate the median from.
+     * @return The median value of the input numbers.
+     */
+    int calculateMedian(const std::vector<int>& numbers) {
+        std::sort(numbers.begin(), numbers.end());
+        if (numbers.size() % 2 == 0) {
+            return (numbers[numbers.size() / 2 - 1] + numbers[numbers.size() / 2]) / 2;
+        } else {
+            return numbers[numbers.size() / 2];
+        }
+    }
+    """
+  },
+  {
+    "method_name": "printNumbers",
+    "documentation": """
+    Prints all numbers from a given range.
+
+    Args:
+        start (int): The starting number of the range.
+        end (int): The ending number of the range.
+
+    Returns:
+        None
+    """,
+    "code": """
+    /**
+     * Prints all numbers from a given range.
+     *
+     * @param start The starting number of the range.
+     * @param end The ending number of the range.
+     */
+    void printNumbers(int start, int end) {
+        for (int i = start; i <= end; ++i) {
+            std::cout << i << std::endl;
+        }
+    }
+    """
+  },
+  {
+    "method_name": "isEven",
+    "documentation": """
+    Checks if a number is even.
+
+    Args:
+        num (int): The number to check.
+
+    Returns:
+        bool: True if the number is even, False otherwise.
+    """,
+    "code": """
+    /**
+     * Checks if a number is even.
+     *
+     * @param num The number to check.
+     * @return True if the number is even, False otherwise.
+     */
+    bool isEven(int num) {
+        return (num % 2 == 0);
+    }
+    """
+  }

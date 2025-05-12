@@ -1,0 +1,2241 @@
+
+
+--- Attempt 1 ---
+[
+  {
+    "method_name": "print_prime_numbers",
+    "documentation": /**
+     * Prints all prime numbers up to a given number.
+     *
+     * @param int n The upper limit for prime numbers.
+     */
+    "code": "void print_prime_numbers(int n) {\n"
+    "    for (int i = 2; i <= n; ++i) {\n"
+    "        bool is_prime = true;\n"
+    "        for (int j = 2; j * j <= i; ++j)\n"
+    "            if (i % j == 0) {\n"
+    "                is_prime = false;\n"
+    "                break;\n"
+    "            }\n"
+    "        if (is_prime) cout << i << ' '; \n"
+    "    }"
+    "}\n"
+  },
+  {
+    "method_name": "binary_search",
+    "documentation": /**
+     * Searches for an element in a sorted array using binary search.
+     *
+     * @param int arr[] The input array.
+     * @param int n The size of the array.
+     * @param int target The element to be searched.
+     * @return int The index of the element if found, -1 otherwise.
+     */
+    "code": "int binary_search(int arr[], int n, int target) {\n"
+    "    int left = 0;\n"
+    "    int right = n - 1;\n"
+    "    while (left <= right) {\n"
+    "        int mid = left + (right - left) / 2;\n"
+    "        if (arr[mid] == target)\n"
+    "            return mid;\n"
+    "        else if (arr[mid] < target)\n"
+    "            left = mid + 1;\n"
+    "        else\n"
+    "            right = mid - 1;\n"
+    "    }\n"
+    "    return -1;"
+    "}\n"
+  },
+  {
+    "method_name": "gcd",
+    "documentation": /**
+     * Calculates the greatest common divisor of two numbers using Euclidean algorithm.
+     *
+     * @param int a The first number.
+     * @param int b The second number.
+     * @return int The greatest common divisor.
+     */
+    "code": "int gcd(int a, int b) {\n"
+    "    while (b != 0) {\n"
+    "        int temp = b;\n"
+    "        b = a % b;\n"
+    "        a = temp;\n"
+    "    }\n"
+    "    return a;"
+    "}\n"
+  }
+]
+
+
+--- Attempt 2 ---
+[
+  {
+    "method_name": "Minimax Algorithm",
+    "documentation": """
+        The Minimax algorithm is a recursive algorithm used for decision making in games like chess, tic-tac-toe, etc.
+        It works by considering all possible moves and their outcomes, then choosing the move that maximizes the chances of winning.
+
+        This function implements the minimax algorithm to find the best move in a game tree.
+
+    """,
+    "code": """
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int minimax(int current_state, bool is_maximizing) {
+  if (is_maximizing) {
+    int best_score = INT_MIN;
+    for (auto& child : get_children(current_state)) {
+      int score = -minimax(child, false);
+      best_score = max(best_score, score);
+    }
+    return best_score;
+  } else {
+    int best_score = INT_MAX;
+    for (auto& child : get_children(current_state)) {
+      int score = minimax(child, true);
+      best_score = min(best_score, score);
+    }
+    return best_score;
+  }
+}
+
+int main() {
+  // Example usage
+  int state = 0; // initialize the game state
+  int best_score = minimax(state, true);
+  cout << "Best score: " << best_score << endl;
+  return 0;
+}
+"""
+  },
+  {
+    "method_name": "Fibonacci Sequence",
+    "documentation": """
+        The Fibonacci sequence is a series of numbers where each number is the sum of the two preceding ones, usually starting with 0 and 1.
+
+        This function generates the Fibonacci sequence up to a given number of terms.
+
+    """,
+    "code": """
+#include <iostream>
+
+using namespace std;
+
+void fibonacci(int n) {
+  if (n <= 0) {
+    cout << "Input should be positive" << endl;
+    return;
+  }
+  int a = 0, b = 1;
+  for (int i = 0; i < n; ++i) {
+    cout << a << " ";
+    int temp = a;
+    a = b;
+    b = temp + b;
+  }
+}
+
+int main() {
+  // Example usage
+  fibonacci(10);
+  return 0;
+}
+"""
+  },
+  {
+    "method_name": "Breadth-First Search",
+    "documentation": """
+        Breadth-First Search (BFS) is a graph traversal algorithm that explores all the nodes at the current level before moving to the next level.
+
+        This function performs a BFS on a given graph or tree.
+
+    """,
+    "code": """
+#include <iostream>
+#include <queue>
+
+using namespace std;
+
+struct Node {
+  int value;
+  vector<Node*> children;
+};
+
+void bfs(Node* root) {
+  if (!root) {
+    cout << "Graph is empty" << endl;
+    return;
+  }
+  queue<Node*> q;
+  q.push(root);
+  while (!q.empty()) {
+    Node* node = q.front();
+    q.pop();
+    cout << node->value << " ";
+    for (auto child : node->children) {
+      q.push(child);
+    }
+  }
+}
+
+int main() {
+  // Example usage
+  Node* root = new Node{1, {new Node{2, {}}, new Node{3, {}}}};
+  bfs(root);
+  return 0;
+}
+"""
+  }
+
+
+--- Attempt 1 ---
+[
+  {
+    "method_name": "maxSubArray",
+    "documentation": /**
+     * Calculates the maximum sum of a subarray within an array.
+     *
+     * @param {int[]} nums The input array.
+     * @return {int} The maximum sum of a subarray.
+     */
+    "code": "int maxSubArray(std::vector<int>& nums) {\n"
+          "    int max_sum = -2147483648;\n"
+          "    int current_sum = 0;\n"
+          "\n"
+          "    for (auto num : nums) {\n"
+          "        current_sum = std::max(num, current_sum + num);\n"
+          "        max_sum = std::max(max_sum, current_sum);\n"
+          "    }\n"
+          "    return max_sum;\n"
+          "}\n"
+  },
+  {
+    "method_name": "binarySearch",
+    "documentation": /**
+     * Performs a binary search on a sorted array.
+     *
+     * @param {int[]} nums The input array.
+     * @param {int} target The target value to search for.
+     * @return {int} The index of the target value if found, -1 otherwise.
+     */
+    "code": "int binarySearch(std::vector<int>& nums, int target) {\n"
+          "    int left = 0;\n"
+          "    int right = nums.size() - 1;\n"
+          "\n"
+          "    while (left <= right) {\n"
+          "        int mid = left + (right - left) / 2;\n"
+          "        if (nums[mid] == target)\n"
+          "            return mid;\n"
+          "        else if (nums[mid] < target)\n"
+          "            left = mid + 1;\n"
+          "        else\n"
+          "            right = mid - 1;\n"
+          "    }\n"
+          "    return -1;\n"
+          "}\n"
+  },
+  {
+    "method_name": "swap",
+    "documentation": /**
+     * Swaps the values of two elements in an array.
+     *
+     * @param {int[]} nums The input array.
+     * @param {int} i The index of the first element to swap.
+     * @param {int} j The index of the second element to swap.
+     */
+    "code": "void swap(int* nums, int i, int j) {\n"
+          "    int temp = nums[i];\n"
+          "    nums[i] = nums[j];\n"
+          "    nums[j] = temp;\n"
+          "}\n"
+  }
+]
+
+
+--- Attempt 1 ---
+[
+  {
+    "method_name": "maxSubarraySum",
+    "documentation": "Calculates the maximum sum of a contiguous subarray within an array.\n\nGiven an integer array nums, find the maximum sum of a contiguous subarray within it.",
+    "code": "/**
+ * Calculates the maximum sum of a contiguous subarray within an array.
+ *
+ * Given an integer array nums, find the maximum sum of a contiguous subarray within it.
+ * @param {number[]} nums The input array of integers.
+ * @return {number} The maximum sum of a contiguous subarray.
+ */
+int maxSubarraySum(int arr[], int n) {
+  if (n == 0) return 0;
+  
+  int curr_sum = arr[0];
+  int max_sum = arr[0];
+  
+  for (int i = 1; i < n; ++i) {
+    // Update current sum to be the maximum of the current number and the sum of current number and previous current sum
+    curr_sum = std::max(arr[i], curr_sum + arr[i]);
+    
+    // Update max sum if current sum is greater
+    max_sum = std::max(max_sum, curr_sum);
+  }
+  
+  return max_sum;
+}
+},
+{
+  "method_name": "findDuplicates",
+  "documentation": "Finds all the duplicate elements in a sorted array.\n\nGiven an integer array nums of length n with at most one duplicate element, find all the unique elements from nums where each is the first occurrence of the corresponding second element. Return them as an array.",
+    "code": "/**
+ * Finds all the duplicate elements in a sorted array.
+ *
+ * Given an integer array nums of length n with at most one duplicate element, find all the unique elements from nums where each is the first occurrence of the corresponding second element. Return them as an array.
+ * @param {number[]} nums The input array of integers.
+ * @return {number[]} An array containing all the unique elements that appear twice in the input array.
+ */
+int* findDuplicates(int arr[], int n) {
+  std::unordered_map<int, bool> num_set;
+  
+  // Count occurrences of each number
+  for (int i = 0; i < n; ++i) {
+    if (num_set.find(arr[i]) != num_set.end()) {
+      // If the number is already in the map, increment its count and add it to the result array
+      (*num_set[arr[i]])++;
+    } else {
+      num_set.insert(std::make_pair(arr[i], 0));
+    }
+  }
+  
+  // Create a new array to store duplicate numbers
+  int* duplicates = (int*)malloc(n * sizeof(int));
+  std::unordered_map<int, bool> dup_num_set;
+  int dup_count = 0;
+  
+  for (auto& pair : num_set) {
+    if (pair.second > 1 && num_set.find(pair.first) != num_set.end()) {
+      duplicates[dup_count++] = pair.first;
+      num_set.erase(pair);
+    }
+  }
+  
+  // Sort the array of duplicates
+  std::sort(duplicates, duplicates + dup_count);
+  
+  return duplicates;
+}
+},
+{
+  "method_name": "isPalindrome",
+  "documentation": "Checks if a given string is a palindrome.\n\nGiven a non-empty string s, you may assume that an empty string should not be considered as a palindrome.",
+    "code": "/**
+ * Checks if a given string is a palindrome.
+ *
+ * Given a non-empty string s, you may assume that an empty string should not be considered as a palindrome.
+ * @param {string} s The input string to check for palindrome property.
+ * @return {boolean} True if the input string is a palindrome, false otherwise.
+ */
+bool isPalindrome(string& s) {
+  // Remove non-alphanumeric characters and convert to lowercase
+  std::string str;
+  for (char c : s) {
+    if (isalnum(c)) {
+      str += tolower(c);
+    }
+  }
+  
+  int left = 0, right = str.size() - 1;
+  
+  while (left < right) {
+    // If any character in the string is not alphanumeric, return false
+    if (!isalnum(str[left])) {
+      return false;
+    }
+    
+    if (!isalnum(str[right])) {
+      return false;
+    }
+    
+    // Compare characters from both ends and reverse the string if they are different
+    if (str[left] != str[right]) {
+      return false;
+    }
+    
+    left++;
+    right--;
+  }
+  
+  return true;
+}
+}
+
+
+--- Attempt 2 ---
+[
+  {
+    "method_name": "maximizeProfit",
+    "documentation": """
+    This function calculates the maximum possible profit from a list of stock prices.
+    
+    Parameters:
+    prices (vector): A vector of integers representing stock prices.
+    
+    Returns:
+    int: The maximum possible profit.
+    """
+    "code": """
+int maximizeProfit(vector<int>& prices) {
+    if (prices.empty()) return 0;
+
+    int i = 1;
+    for (; i < prices.size(); ++i) {
+        if (prices[i] > prices[i - 1]) {
+            prices[0] += prices[i] - prices[i - 1];
+        }
+    }
+
+    return prices[0];
+}
+"""
+  },
+  {
+    "method_name": "isPalindrome",
+    "documentation": """
+    This function checks whether a given string is a palindrome.
+    
+    Parameters:
+    s (string): The input string.
+    
+    Returns:
+    bool: True if the string is a palindrome, False otherwise.
+    """
+    "code": """
+bool isPalindrome(string s) {
+    int left = 0;
+    int right = s.length() - 1;
+
+    while (left < right) {
+        if (s[left] != s[right]) return false;
+        ++left;
+        --right;
+    }
+
+    return true;
+}
+"""
+  },
+  {
+    "method_name": "findMiddle",
+    "documentation": """
+    This function finds the middle element of a sorted array.
+    
+    Parameters:
+    nums (vector): A vector of integers representing the input array.
+    
+    Returns:
+    int: The middle element of the array. If the array has an even number of elements, returns the second middle element.
+    """
+    "code": """
+int findMiddle(vector<int>& nums) {
+    int left = 0;
+    int right = nums.size() - 1;
+
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] == nums[left]) ++left;
+        else if (nums[mid] == nums[right]) --right;
+        else return nums[mid];
+    }
+
+    return nums[left];
+}
+"""
+  }
+
+
+--- Attempt 3 ---
+[
+  {
+    "method_name": "get_prime_numbers_up_to_n",
+    "documentation": /**
+     * Generates a list of prime numbers up to n.
+     *
+     * @param int n The upper limit for generating prime numbers.
+     * @return std::vector<int> A vector of prime numbers up to n.
+     */
+    "code": """
+int get_prime_numbers_up_to_n(int n) {
+  std::vector<int> primes;
+  bool isPrime = true;
+
+  for (int i = 2; i <= n; ++i) {
+    isPrime = true;
+    for (int j = 2; j < i && isPrime; ++j) {
+      if (i % j == 0) {
+        isPrime = false;
+        break;
+      }
+    }
+
+    if (isPrime) {
+      primes.push_back(i);
+    }
+  }
+
+  return primes;
+}
+"""
+  },
+  {
+    "method_name": "find_longest_common_subsequence",
+    "documentation": /**
+     * Finds the longest common subsequence between two strings.
+     *
+     * @param std::string s1 The first string.
+     * @param std::string s2 The second string.
+     * @return std::string The longest common subsequence between s1 and s2.
+     */
+    "code": """
+std::string find_longest_common_subsequence(std::string s1, std::string s2) {
+  int m = s1.length();
+  int n = s2.length();
+
+  // Create a table to store lengths of longest common subsequences
+  std::vector<std::vector<int>> dp(m + 1, std::vector<int>(n + 1));
+
+  for (int i = 0; i <= m; ++i) {
+    for (int j = 0; j <= n; ++j) {
+      if (i == 0 || j == 0) {
+        dp[i][j] = 0;
+      } else if (s1[i - 1] == s2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+      } else {
+        dp[i][j] = std::max(dp[i - 1][j], dp[i][j - 1]);
+      }
+    }
+  }
+
+  // Reconstruct the longest common subsequence
+  std::string lcs = "";
+  int i = m, j = n;
+
+  while (i > 0 && j > 0) {
+    if (s1[i - 1] == s2[j - 1]) {
+      lcs.push_back(s1[i - 1]);
+      --i;
+      --j;
+    } else if (dp[i - 1][j] > dp[i][j - 1]) {
+      --i;
+    } else {
+      --j;
+    }
+  }
+
+  // Reverse the LCS to get it in correct order
+  for (auto& c : lcs) {
+    lcs.push_back(c);
+  }
+
+  return lcs;
+}
+"""
+  },
+  {
+    "method_name": "binary_search",
+    "documentation": /**
+     * Performs a binary search on a sorted array.
+     *
+     * @param int arr[] The sorted array to perform the binary search on.
+     * @param int target The value to search for in the array.
+     * @return int The index of the target value if found, -1 otherwise.
+     */
+    "code": """
+int binary_search(int arr[], int n, int target) {
+  int left = 0;
+  int right = n - 1;
+
+  while (left <= right && target >= arr[left] && target <= arr[right]) {
+    // Calculate the middle index
+    int mid = left + (right - left) / 2;
+
+    if (arr[mid] == target) {
+      return mid;
+    } else if (arr[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  // Return -1 if the target is not found
+  return -1;
+}
+"""
+  }
+
+
+--- Attempt 2 ---
+[
+  {
+    "method_name": "maximum_element",
+    "documentation": """
+    Returns the maximum element in a given container.
+
+    @param container The input container.
+    @return The maximum element in the container.
+    """,
+    "code": "template <typename T> T maximum_element(T first, T last) { \
+        T max_value = *first; \
+        for (T it = first + 1; it != last; ++it) { \
+            if (*it > max_value) { \
+                max_value = *it; \
+            } \
+        } \
+        return max_value; \
+    }"
+  },
+  {
+    "method_name": "fibonacci",
+    "documentation": """
+    Calculates the nth Fibonacci number.
+
+    @param n The position of the Fibonacci number to calculate.
+    @return The nth Fibonacci number.
+    """,
+    "code": "int fibonacci(int n) { \
+        if (n <= 1) { \
+            return n; \
+        } else { \
+            return fibonacci(n - 1) + fibonacci(n - 2); \
+        } \
+    }"
+  },
+  {
+    "method_name": "string_to_uppercase",
+    "documentation": """
+    Converts a string to uppercase.
+
+    @param str The input string.
+    @return The string converted to uppercase.
+    """,
+    "code": "std::string string_to_uppercase(const std::string& str) { \
+        std::string result = str; \
+        for (char& c : result) { \
+            c = std::toupper(c); \
+        } \
+        return result; \
+    }"
+  }
+]
+
+
+--- Attempt 4 ---
+[
+  {
+    "method_name": "getEvenNumbersInArray",
+    "documentation": "Returns a vector of even numbers from an input vector of integers.",
+    "code": "std::vector<int> getEvenNumbersInArray(std::vector<int>& inputVector) {\n"
+              "    std::vector<int> evenNumbers;\n"
+              "    for (int number : inputVector) {\n"
+              "        if (number % 2 == 0) { // checks if the number is even\n"
+              "            evenNumbers.push_back(number);\n"
+              "        }\n"
+              "    }\n"
+              "    return evenNumbers;\n"
+              "}\n"
+  },
+  {
+    "method_name": "findLongestStringInArray",
+    "documentation": "Finds and returns the longest string from an input array of strings.",
+    "code": "std::string findLongestStringInArray(const std::vector<std::string>& inputVector) {\n"
+            "    if (inputVector.empty()) { // checks for empty vector\n"
+            "        return \"\";\n"
+            "    }\n"
+            "    int maxLength = 0;\n"
+            "    std::string longestString; \n"
+            "    for (const auto& str : inputVector) {\n"
+            "        if (str.size() > maxLength) {\n"
+            "            max_length = str.size();\n"
+            "            longestString = str;\n"
+            "        }\n"
+            "    }\n"
+            "    return longestString;\n"
+            "}\n"
+  },
+  {
+    "method_name": "swapValuesInMap",
+    "documentation": "Swaps the values of two keys in a given map.",
+    "code": "void swapValuesInMap(std::map<std::string, int>& inputMap, const std::string& key1, const std::string& key2) {\n"
+            "    if (inputMap.find(key1) != inputMap.end() && inputMap.find(key2) != inputMap.end()) {\n"
+            "        int temp = inputMap[key1];\n"
+            "        inputMap[key1] = inputMap[key2];\n"
+            "        inputMap[key2] = temp;\n"
+            "    }\n"
+            "}\n"
+  }
+]
+
+
+--- Attempt 5 ---
+[
+  {
+    "method_name": "maxValue",
+    "documentation": """
+        Returns the maximum value from an array of integers.
+
+        @param values A vector of integers.
+        @return The maximum value in the array.
+    """,
+    "code": """
+int maxValue(vector<int>& values) {
+    int maxVal = values[0];
+    for (int val : values) {
+        if (val > maxVal) {
+            maxVal = val;
+        }
+    }
+    return maxVal;
+}
+"""
+  },
+  {
+    "method_name": "reverseString",
+    "documentation": """
+        Reverses a string.
+
+        @param str The string to be reversed.
+        @return The reversed string.
+    """,
+    "code": """
+string reverseString(string str) {
+    string rev = "";
+    for (int i = str.length() - 1; i >= 0; i--) {
+        rev += str[i];
+    }
+    return rev;
+}
+"""
+  },
+  {
+    "method_name": "isPrime",
+    "documentation": """
+        Checks if a number is prime.
+
+        @param num The number to be checked.
+        @return True if the number is prime, false otherwise.
+    """,
+    "code": """
+bool isPrime(int num) {
+    if (num <= 1) {
+        return false;
+    }
+    for (int i = 2; i * i <= num; i++) {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+    return true;
+}
+"""
+  }
+
+
+--- Attempt 6 ---
+ [
+  {
+   "method_name": "maxOfArray",
+   "documentation": "Returns the maximum value in an array of integers.\n\nParameters:\n* arr (int[]): The input array.\nReturns:\n* int: The maximum value in the array.",
+   "code": "int maxOfArray(int arr[], int size) { \n    int max = arr[0];\n    for (int i = 1; i < size; i++)\n        if (arr[i] > max)\n            max = arr[i];\n    return max;\n}"
+  },
+  {
+   "method_name": "swapValues",
+   "documentation": "Swaps the values of two integers.\n\nParameters:\n* a (int &): The first integer.\n* b (int &): The second integer.",
+   "code": "void swapValues(int &a, int &b) { \n    int temp = a;\n    a = b;\n    b = temp;\n}"
+  },
+  {
+   "method_name": "isPrime",
+   "documentation": "Checks if a number is prime.\n\nParameters:\n* num (int): The input number.",
+   "code": "bool isPrime(int num) { \n    if (num <= 1)\n        return false;\n    for (int i = 2; i * i <= num; i++)\n        if (num % i == 0)\n            return false;\n    return true;\n}"
+  }
+]
+
+
+--- Attempt 7 ---
+[
+  {
+    "method_name": "swapTwoValues",
+    "documentation": "Swaps the values of two variables without using a temporary variable.\n\nArguments:\n  int &a - The first integer to be swapped.\n  int &b - The second integer to be swapped.\nReturns: None.",
+    "code": "void swapTwoValues(int &a, int &b) { std::swap(a, b); }"
+  },
+  {
+    "method_name": "generateRandomNumber",
+    "documentation": "Generates a random number within a specified range and returns it.\n\nArguments:\n  int min_value - The minimum value in the range (inclusive).\n  int max_value - The maximum value in the range (inclusive).\nReturns: int - A random integer between min_value and max_value.",
+    "code": "int generateRandomNumber(int min_value, int max_value) { std::random_device rd; std::mt19937 gen(rd()); std::uniform_int_distribution<> dis(min_value, max_value); return dis(gen); }"
+  },
+  {
+    "method_name": "binarySearch",
+    "documentation": "Performs a binary search on a sorted array to find the index of a target value.\n\nArguments:\n  int arr[] - The sorted array to be searched.\n  int size - The number of elements in the array.\n  int target - The value to be searched for.\nReturns: int - The index of the target value if found, -1 otherwise.",
+    "code": "int binarySearch(int arr[], int size, int target) { int left = 0, right = size - 1; while (left <= right) { int mid = left + (right - left) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) left = mid + 1; else right = mid - 1; } return -1; }"
+  }
+]
+
+
+--- Attempt 9 ---
+[
+  {
+    "method_name": "find_longest_subsequence",
+    "documentation": """
+    Finds the longest subsequence of a given sequence that is also in another sequence.
+    
+    Args:
+        seq1 (vector): The first sequence to compare.
+        seq2 (vector): The second sequence to compare against.
+    
+    Returns:
+        int: The length of the longest common subsequence.
+    """,
+    "code": """
+int find_longest_subsequence(vector<int> seq1, vector<int> seq2) {
+    // Create a 2D array to store the lengths of common subsequences
+    vector<vector<int>> dp = vector<vector<int>>(seq1.size() + 1, vector<int>(seq2.size() + 1));
+    
+    for (int i = 0; i <= seq1.size(); ++i) {
+        for (int j = 0; j <= seq2.size(); ++j) {
+            // If the current elements match, we can extend the common subsequence
+            if (seq1[i - 1] == seq2[j - 1]) {
+                dp[i][j] = dp[i - 1][j - 1] + 1;
+            }
+            // Otherwise, we choose the maximum length from the previous elements
+            else {
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]);
+            }
+        }
+    }
+    
+    return dp.back().back();
+}
+"""
+  },
+  {
+    "method_name": "check_prime",
+    "documentation": """
+    Checks if a given number is prime.
+    
+    Args:
+        num (int): The number to check for primality.
+    
+    Returns:
+        bool: True if the number is prime, False otherwise.
+    """,
+    "code": """
+bool check_prime(int num) {
+    // Handle edge cases
+    if (num < 2) return false;
+    
+    // Check divisibility up to the square root of the number
+    for (int i = 2; i * i <= num; ++i) {
+        if (num % i == 0) return false;
+    }
+    
+    return true;
+}
+"""
+  },
+  {
+    "method_name": "sort_by_frequency",
+    "documentation": """
+    Sorts a list of words by their frequency in the English language.
+    
+    Args:
+        words (vector): The list of words to sort.
+    
+    Returns:
+        vector: The sorted list of words.
+    """,
+    "code": """
+#include <vector>
+#include <algorithm>
+#include <string>
+#include <map>
+
+// Map of word frequencies
+std::map<std::string, int> frequency_map = {
+    {"the", 1},
+    {"and", 1},
+    {"a", 1},
+    // Add more words and their frequencies as needed...
+};
+
+vector<string> sort_by_frequency(vector<string> words) {
+    // Create a vector to store the sorted words
+    vector<pair<string, int>> word_freq;
+    
+    for (auto word : words) {
+        auto it = frequency_map.find(word);
+        if (it != frequency_map.end()) {
+            word_freq.push_back(make_pair(word, it->second));
+        }
+    }
+    
+    // Sort the words by their frequencies
+    sort(word_freq.begin(), word_freq.end(), [](pair<string, int> a, pair<string, int> b) {
+        return a.second < b.second;
+    });
+    
+    // Extract the sorted words from the vector of pairs
+    vector<string> result;
+    for (auto it = word_freq.rbegin(); it != word_freq.rend(); ++it) {
+        result.push_back(it->first);
+    }
+    
+    return result;
+}
+"""
+  }
+
+
+--- Attempt 10 ---
+[
+  {
+    "method_name": "maxDepthFirstSearch",
+    "documentation": """
+    Performs a depth-first search on a tree-like data structure.
+
+    Parameters:
+    - root_node (Node*): The root node of the tree.
+    - visited_set (set<node*>): A set to keep track of visited nodes.
+
+    Returns:
+    - int: The maximum depth reached during the search.
+    """
+    "code": """
+int maxDepthFirstSearch(Node* root, set<Node*>& visitedSet) {
+  if (!root) return 0;
+  
+  int left = maxDepthFirstSearch(root->left, visitedSet);
+  int right = maxDepthFirstSearch(root->right, visitedSet);
+  
+  visitedSet.insert(root);
+  return max(left, right) + 1;
+}
+"""
+  },
+  {
+    "method_name": "mergeTwoLists",
+    "documentation": """
+    Merges two sorted linked lists into a single sorted linked list.
+
+    Parameters:
+    - headA (ListNode*): The head of the first linked list.
+    - headB (ListNode*): The head of the second linked list.
+    - mergedHead (ListNode*): A pointer to the head of the merged linked list.
+
+    Returns:
+    - ListNode*: The head of the merged linked list.
+    """
+    "code": """
+ListNode* mergeTwoLists(ListNode* headA, ListNode* headB) {
+  if (!headA) return headB;
+  if (!headB) return headA;
+
+  ListNode dummy(0);
+  ListNode* current = &dummy;
+  
+  while (headA && headB) {
+    if (headA->val < headB->val) {
+      current->next = headA;
+      headA = headA->next;
+    } else {
+      current->next = headB;
+      headB = headB->next;
+    }
+    current = current->next;
+  }
+  
+  current->next = headA ? headA : headB;
+  
+  return dummy.next;
+}
+"""
+  },
+  {
+    "method_name": "findClosestPair",
+    "documentation": """
+    Finds the closest pair of points in a set of 2D points.
+
+    Parameters:
+    - points (vector<pair<int, int>>): A vector of pairs representing the points.
+    - distanceFunction (function<double(double, double)>): A function to calculate the Euclidean distance between two points.
+
+    Returns:
+    - double: The minimum distance between any pair of points.
+    """
+    "code": """
+double findClosestPair(vector<pair<int, int>>& points, function<double(double, double)> distanceFunction) {
+  int n = points.size();
+  if (n < 2) return INFINITY;
+  
+  vector<double> leftDistances(n);
+  for (int i = 0; i < n - 1; i++) {
+    leftDistances[i] = distanceFunction(points[i].first, points[i + 1].first);
+  }
+  double minDistance = min_element(leftDistances.begin(), leftDistances.end()) - leftDistances.begin();
+  
+  vector<double> rightDistances(n);
+  for (int i = n - 2; i >= 0; i--) {
+    rightDistances[i] = distanceFunction(points[i].first, points[i + 1].first);
+  }
+  double minRightDistance = min_element(rightDistances.begin(), rightDistances.end()) - rightDistances.begin();
+  
+  int leftIndex = find(leftDistances.begin(), leftDistances.end(), minDistance) - leftDistances.begin();
+  int rightIndex = find(rightDistances.begin(), rightDistances.end(), minRightDistance) - rightDistances.begin();
+  
+  if (leftIndex < n - 1 && rightIndex > 0 && leftIndex != rightIndex &&
+    distanceFunction(points[leftIndex].first, points[rightIndex - 1].first) <
+        (distanceFunction(points[leftIndex].first, points[leftIndex + 1].first) +
+         distanceFunction(points[rightIndex - 1].first, points[rightIndex].first))) {
+    return distanceFunction(points[leftIndex].first, points[rightIndex - 1].first);
+  } else if (leftIndex < n - 1 && rightIndex > 0 && leftIndex == rightIndex &&
+             distanceFunction(points[leftIndex].first, points[rightIndex].first) <
+                (distanceFunction(points[leftIndex].first, points[leftIndex + 1].first) +
+                 distanceFunction(points[rightIndex - 1].first, points[rightIndex].first))) {
+    return distanceFunction(points[leftIndex].first, points[rightIndex].first);
+  }
+  
+  return min(minDistance, minRightDistance);
+}
+"""
+  }
+
+
+--- Attempt 11 ---
+[
+  {
+    "method_name": "MaximizeProductSubarray",
+    "documentation": /**
+     * Returns the maximum product of a subarray within the given array.
+     *
+     * @param {number[]} nums - The input array of numbers.
+     * @returns {number} The maximum product of a subarray within the given array.
+     */
+    "code": """
+int maxProductSubarray(int* nums, int numsSize) {
+  if (numsSize == 0) return 0;
+
+  int res = nums[0];
+  int min_val = nums[0];
+
+  for (int i = 1; i < numsSize; ++i) {
+    if (nums[i] < 0) std::swap(res, min_val);
+
+    res = std::max(res, nums[i]);
+    min_val = std::min(min_val, nums[i]);
+  }
+
+  return std::max(res, min_val);
+}
+"""
+  },
+  {
+    "method_name": "FindDuplicate",
+    "documentation": /**
+     * Finds the first duplicate in a sorted array of unique numbers.
+     *
+     * @param {number[]} nums - The input array of numbers.
+     * @returns {number} The index of the first duplicate in the array, or -1 if no duplicates exist.
+     */
+    "code": """
+int findDuplicate(int* nums, int numsSize) {
+  int slow = 0;
+  int fast = numsSize - 1;
+
+  while (slow < fast) {
+    slow = nums[slow];
+    fast = nums[nums[fast]];
+    if (slow == fast) break;
+  }
+
+  return slow;
+}
+"""
+  },
+  {
+    "method_name": "ReverseInteger",
+    "documentation": /**
+     * Reverses an integer by manipulating the bits.
+     *
+     * @param {int} x - The input integer to reverse.
+     * @returns {int} The reversed integer, or 0 if the input is negative.
+     */
+    "code": """
+int reverseInteger(int x) {
+  long res = 0;
+  while (x != 0) {
+    res = res * 10 + x % 10;
+    x /= 10;
+  }
+
+  if (res > INT_MAX / 10) return 0;
+
+  return (int) res;
+}
+"""
+  }
+
+--- Attempt 1 ---
+Error: Expecting ',' delimiter: line 4 column 24 (char 60)
+Response:
+[
+  {
+    "method_name": "maxStack",
+    "documentation": """
+        Maximum Stack Implementation
+        ---------------------------
+
+        This function returns the maximum element from a stack of integers.
+
+        Args:
+            num (int): The number to be pushed onto the stack.
+        Returns:
+            int: The maximum element on the stack.
+    """,
+    "code": """
+    int maxStack(int num) {
+        // Create a new stack
+        std::stack<int> s;
+        
+        // Push the initial value onto the stack
+        s.push(0);
+        
+        // Continue pushing values until we find the max
+        while (s.top() != num) {
+            // Pop the top element and add it to the total
+            int temp = s.top();
+            s.pop();
+            
+            // Add the popped value to the running sum
+            s.push(s.top() + temp);
+        }
+        
+        return num;
+    }
+    """
+  },
+  {
+    "method_name": "isSubstring",
+    "documentation": """
+        Check if a Substring Exists
+        -------------------------
+
+        This function checks if a given substring exists within another string.
+
+        Args:
+            main_string (str): The original string to search in.
+            sub_string (str): The substring to look for.
+        Returns:
+            bool: True if the substring is found, False otherwise.
+    """,
+    "code": """
+    bool isSubstring(const std::string& mainString, const std::string& subString) {
+        // If the sub-string is empty or longer than the main string return false
+        if (subString.length() > mainString.length()) {
+            return false;
+        }
+        
+        // Iterate over the main string and check for matches
+        for (int i = 0; i <= mainString.length() - subString.length(); ++i) {
+            if (mainString.substr(i, subString.length()) == subString) {
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    """
+  },
+  {
+    "method_name": "binarySearch",
+    "documentation": """
+        Binary Search Algorithm
+        -------------------------
+
+        This function performs a binary search on a sorted array to find the position of a given target value.
+
+        Args:
+            array (int): The sorted array to search in.
+            low (int): The starting index of the search range.
+            high (int): The ending index of the search range.
+            target (int): The target value to search for.
+        Returns:
+            int: The position of the target value in the array, or -1 if not found.
+    """,
+    "code": """
+    int binarySearch(int array[], int low, int high, int target) {
+        while (low <= high && low < array.length()) {
+            // Calculate the midpoint
+            int mid = low + (high - low) / 2;
+            
+            // If we find our target value return its position
+            if (array[mid] == target) {
+                return mid;
+            }
+            // If the left half is sorted
+            else if (array[low] <= array[mid]) {
+                // If our target is in the left half, move to that half
+                high = mid - 1;
+            }
+            // If the right half is sorted
+            else {
+                // If our target is in the right half, move to that half
+                low = mid + 1;
+            }
+        }
+        
+        return -1;  // Not found
+    }
+    """
+  }
+
+--- Attempt 2 ---
+Error: Expecting value: line 4 column 22 (char 63)
+Response:
+[
+  {
+    "method_name": "isPrimeNumber",
+    "documentation": /**
+     * Checks if a given number is prime.
+     *
+     * @param num The number to check for primality.
+     * @return True if the number is prime, false otherwise.
+     */
+    "code": "bool isPrimeNumber(int num) {
+      if (num <= 1) return false;
+      for (int i = 2; i <= sqrt(num); ++i) {
+        if (num % i == 0) return false;
+      }
+      return true;
+    }"
+  },
+  {
+    "method_name": "sortDescending",
+    "documentation": /**
+     * Sorts an array in descending order.
+     *
+     * @param arr The array to sort.
+     */
+    "code": "void sortDescending(int* arr, int size) {
+      for (int i = 0; i < size - 1; ++i) {
+        for (int j = 0; j < size - i - 1; ++j) {
+          if (arr[j] < arr[j + 1]) {
+            // Swap elements
+            int temp = arr[j];
+            arr[j] = arr[j + 1];
+            arr[j + 1] = temp;
+          }
+        }
+      }
+    }"
+  },
+  {
+    "method_name": "findStringInArray",
+    "documentation": /**
+     * Finds the first occurrence of a given string in an array.
+     *
+     * @param arr The array to search.
+     * @param str The string to find.
+     * @return The index of the found string, -1 if not found.
+     */
+    "code": "int findStringInArray(const char* arr[], const char* str) {
+      for (int i = 0; ; ++i) {
+        if (strcmp(arr[i], str) == 0) return i;
+        else if (arr[i][0] == '\0') return -1;
+      }
+    }"
+  }
+]
+
+--- Attempt 1 ---
+Error: Expecting value: line 4 column 22 (char 64)
+Response:
+[
+  {
+    "method_name": "maxSubArraySum",
+    "documentation": /**
+     * This method calculates the maximum sum of a subarray within a one-dimensional array of integers.
+     *
+     * @param array The input array
+     * @return The maximum sum of a subarray
+     */
+    "code": "int maxSubArraySum(int arr[], int size) {\n"
+  },
+  {
+    "method_name": "mergeSortedArrays",
+    "documentation": /**
+     * This method merges two sorted arrays into one sorted array.
+     *
+     * @param arr1 The first sorted array
+     * @param arr2 The second sorted array
+     * @return The merged sorted array
+     */
+    "code": "int* mergeSortedArrays(int arr1[], int size1, int arr2[], int size2) {\n"
+  },
+  {
+    "method_name": "binarySearch",
+    "documentation": /**
+     * This method performs a binary search on a sorted array to find an element.
+     *
+     * @param array The input array
+     * @param target The target element to be searched
+     * @return True if the target is found, False otherwise
+     */
+    "code": "bool binarySearch(int arr[], int size, int target) {\n"
+  }
+]
+
+--- Attempt 1 ---
+Error: Expecting ',' delimiter: line 4 column 24 (char 66)
+Response:
+```json
+[
+  {
+    "method_name": "maxSubArraySum",
+    "documentation": """
+/**
+ * This function calculates the maximum sum of a subarray within an array.
+ *
+ * Args:
+ *     arr (vector): Input vector of integers.
+ *     size (int): Size of the input vector.
+ *
+ * Returns:
+ *     int: Maximum sum of a subarray.
+ */
+int maxSubArraySum(vector<int>& arr, int size) {
+    int max_so_far = INT_MIN;
+    int max_ending_here = 0;
+
+    for (int i = 0; i < size; i++) {
+        max_ending_here = max_ending_here + arr[i];
+        if (max_so_far < max_ending_here)
+            max_so_far = max_ending_here;
+        if (max_ending_here < 0)
+            max_ending_here = 0;
+    }
+
+    return max_so_far;
+}
+""",
+    "code": "int maxSubArraySum(vector<int>& arr, int size) { int max_so_far = INT_MIN; int max_ending_here = 0; for (int i = 0; i < size; i++) { max_ending_here = max_ending_here + arr[i]; if (max_so_far < max_ending_here) max_so_far = max_ending_here; if (max_ending_here < 0) max_ending_here = 0; } return max_so_far; }"
+  },
+  {
+    "method_name": "convertToBinary",
+    "documentation": """
+/**
+ * This function converts a decimal number to its binary equivalent.
+ *
+ * Args:
+ *     num (int): Decimal number to be converted.
+ *
+ * Returns:
+ *     string: Binary representation of the input number as a string.
+ */
+string convertToBinary(int num) {
+    if (num == 0)
+        return "0";
+    string res = "";
+
+    while (num > 0) {
+        res = (num % 2 == 0 ? "0" : "1") + res;
+        num /= 2;
+    }
+
+    return res;
+}
+""",
+    "code": "string convertToBinary(int num) { if (num == 0) return \"0\"; string res = \"\"; while (num > 0) { res = (num % 2 == 0 ? \"0\" : \"1\") + res; num /= 2; } return res; }"
+  },
+  {
+    "method_name": "sortArray",
+    "documentation": """
+/**
+ * This function sorts an array of integers in ascending order.
+ *
+ * Args:
+ *     arr (vector): Input vector of integers.
+ */
+void sortArray(vector<int>& arr) {
+    int n = arr.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (arr[i] > arr[j]) {
+                // swap elements
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
+""",
+    "code": "void sortArray(vector<int>& arr) { int n = arr.size(); for (int i = 0; i < n - 1; i++) { for (int j = i + 1; j < n; j++) { if (arr[i] > arr[j]) { // swap elements int temp = arr[i]; arr[i] = arr[j]; arr[j] = temp; } } } }"
+}
+```
+
+--- Attempt 2 ---
+Error: Expecting ',' delimiter: line 4 column 24 (char 71)
+Response:
+Here are three unique C++ methods in JSON format, along with their detailed documentation and implementation:
+
+[
+  {
+    "method_name": "fibonacci_recursive",
+    "documentation": """/**
+     * Calculates the nth Fibonacci number using recursion.
+     *
+     * @param n The position of the Fibonacci number to calculate.
+     * @return The nth Fibonacci number.
+     */
+     int fibonacci_recursive(int n) {
+       if (n <= 1)
+         return n;
+       else
+         return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2);
+     }
+    """,
+    "code": "int fibonacci_recursive(int n) { if (n <= 1) return n; else return fibonacci_recursive(n - 1) + fibonacci_recursive(n - 2); }"
+  },
+  {
+    "method_name": "prime_number_checker",
+    "documentation": """/**
+     * Checks whether a number is prime.
+     *
+     * @param num The number to check for primality.
+     * @return True if the number is prime, false otherwise.
+     */
+     bool is_prime(int num) {
+       if (num <= 1)
+         return false;
+       for (int i = 2; i <= sqrt(num); i++)
+         if (num % i == 0)
+           return false;
+       return true;
+     }
+    """,
+    "code": "bool is_prime(int num) { if (num <= 1) return false; for (int i = 2; i <= sqrt(num); i++) if (num % i == 0) return false; return true; }"
+  },
+  {
+    "method_name": "binary_search",
+    "documentation": """/**
+     * Performs a binary search on an array.
+     *
+     * @param arr The array to search in.
+     * @param target The value to search for.
+     * @return The index of the target value if found, -1 otherwise.
+     */
+     int binary_search(int arr[], int target) {
+       int low = 0;
+       int high = sizeof(arr) / sizeof(arr[0]) - 1;
+       while (low <= high) {
+         int mid = low + (high - low) / 2;
+         if (arr[mid] == target)
+           return mid;
+         else if (arr[mid] < target)
+           low = mid + 1;
+         else
+           high = mid - 1;
+       }
+       return -1;
+     }
+    """,
+    "code": "int binary_search(int arr[], int target) { int low = 0; int high = sizeof(arr) / sizeof(arr[0]) - 1; while (low <= high) { int mid = low + (high - low) / 2; if (arr[mid] == target) return mid; else if (arr[mid] < target) low = mid + 1; else high = mid - 1; } return -1; }"
+  }
+]
+
+--- Attempt 1 ---
+Error: Expecting ',' delimiter: line 5 column 5 (char 392)
+Response:
+Here are three unique C++ methods in JSON format:
+
+```
+[
+  {
+    "method_name": "swapValues",
+    "documentation": /**
+     * Swaps the values of two variables.
+     *
+     * This function takes two integers as input and swaps their values.
+     * It does not return anything, but modifies the input parameters to contain the swapped values.
+     *
+     * @param a The first integer value
+     * @param b The second integer value
+     */
+    "code": "void swapValues(int &a, int &b) { std::swap(a, b); }"
+  },
+  {
+    "method_name": "maxOfThree",
+    "documentation": /**
+     * Calculates the maximum of three numbers.
+     *
+     * This function takes three integers as input and returns their maximum value.
+     * If all inputs are negative, it returns the largest among them. If any input is zero or positive, it returns that number.
+     *
+     * @param a The first integer
+     * @param b The second integer
+     * @param c The third integer
+     * @return The maximum of the three integers
+     */
+    "code": "int maxOfThree(int a, int b, int c) { return std::max(a, std::max(b, c)); }"
+  },
+  {
+    "method_name": "countVowels",
+    "documentation": /**
+     * Counts the number of vowels in a string.
+     *
+     * This function takes a character array as input and returns its vowel count.
+     * It ignores all non-alphabetic characters.
+     *
+     * @param str The input character array
+     * @return The number of vowels in the input string
+     */
+    "code": "int countVowels(char str[]) { int count = 0; for (char c : str) { if ('a' <= c && c <= 'z') count++; } return count; }"
+  }
+]
+```
+
+--- Attempt 2 ---
+Error: Expecting ',' delimiter: line 5 column 5 (char 456)
+Response:
+```json
+[
+  {
+    "method_name": "MinimumWindowSubsequence",
+    "documentation": /**
+     * Returns the minimum window of a given subsequence in an array.
+     *
+     * The function iterates through the array and keeps track of the first occurrence of each character in the subsequence.
+     * It then checks for the remaining characters in the subsequence. If it finds all of them in the current window, it updates the minimum window found so far.
+     */
+    "code": /**
+      std::string minimumWindowSubsequence(std::vector<char> nums, char target) {
+        if (nums.empty() || target == '\0') return "";
+        int start = 0;
+        int min_len = INT_MAX;
+        int min_start = 0;
+        std::unordered_map<char, int> map;
+        for (int i = 0; i < nums.size(); i++) {
+          if (!map.empty() && map[target]) {
+            while (start <= i - 1) {
+              if (nums[start] == target)
+                min_len = std::min(min_len, i - start + 1);
+              if (map[nums[start]]--) map.erase(nums[start]);
+              start++;
+            }
+          }
+          map[nums[i]]++;
+        }
+        return min_len > 0 ? std::string(nums.begin() + min_start, nums.begin() + min_start + min_len) : "";
+      }
+    */
+  },
+  {
+    "method_name": "MergeSortedArrays",
+    "documentation": /**
+     * Merges two sorted arrays into a single sorted array.
+     *
+     * The function uses two pointers to track the current position in both arrays. It compares the elements at the current positions and adds the smaller one to the result array. If the end of an array is reached, it appends the remaining elements from the other array to the result.
+     */
+    "code": /**
+      std::vector<int> mergeSortedArrays(std::vector<std::vector<int>>& nums) {
+        int total = 0;
+        for (auto& vec : nums)
+          total += vec.size();
+        std::vector<int> result(total);
+        int left = 0, right = 0;
+        for (int i = 0; i < total; i++) {
+          if (left >= nums[0].size())
+            result[i] = nums[1][right++];
+          else if (right >= nums[1].size())
+            result[i] = nums[0][left++];
+          else if (nums[0][left] <= nums[1][right])
+            result[i] = nums[0][left++],
+            left++;
+          else
+            result[i] = nums[1][right++],
+            right++;
+        }
+        return result;
+      }
+    */
+  },
+  {
+    "method_name": "RotateArray",
+    "documentation": /**
+     * Rotates an array by a given number of positions.
+     *
+     * The function uses a temporary array to store the rotated elements and then copies them back into the original array. This approach preserves the original order of elements, which is important if we want to maintain some properties (e.g., being sorted).
+     */
+    "code": /**
+      void rotateArray(int* nums, int numsSize, int k) {
+        int* temp = new int[numsSize];
+        for (int i = 0; i < numsSize; i++)
+          temp[i] = nums[(i + k) % numsSize];
+        for (int i = 0; i < numsSize; i++) {
+          nums[i] = temp[i];
+        }
+        delete[] temp;
+      }
+    */
+  }
+]
+```
+
+--- Attempt 1 ---
+Error: After sanitation, still invalid JSON: Expecting ',' delimiter: line 4 column 24 (char 74)
+Response:
+```json
+[
+  {
+    "method_name": "minMaxComparisonMethod",
+    "documentation": """
+    Compares two values and returns the minimum or maximum value based on comparison.
+
+    This function takes two parameters: a and b. The method first compares these two numbers.
+    If they are equal, it returns their sum. Otherwise, it compares which one is smaller (a < b)
+    or larger (a > b). In this case, it returns the smaller or larger number respectively.
+
+    Example:
+        minMaxComparisonMethod(5, 3) -> 3
+        minMaxComparisonMethod(10, 15) -> 15
+
+    Time complexity: O(1).
+    Space complexity: O(1).
+
+    """
+    , 
+    "code": """
+int minMaxComparisonMethod(int a, int b) {
+    if (a == b) {
+        return a + b;
+    } else if (a < b) {
+        return a;
+    } else {
+        return b;
+    }
+}
+    """
+  },
+  {
+    "method_name": "binarySearchAlgorithm",
+    "documentation": """
+    This is the binary search algorithm. It's used to find an element in a sorted array.
+
+    The time complexity for this algorithm is O(log n), where 'n' is the size of the list.
+    However, it only works with sorted lists.
+
+    Example:
+        binarySearchAlgorithm(10, [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]) -> 0
+        binarySearchAlgorithm(25, [5, 15, 20]) -> -1
+
+    Space complexity: O(log n) for the recursion stack.
+
+    """
+    , 
+    "code": """
+int binarySearchAlgorithm(int target, int* array, int size) {
+    if (size == 0 || array[0] > target) {
+        return -1;
+    }
+
+    int low = 0;
+    int high = size - 1;
+
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        int currentElement = array[mid];
+
+        if (currentElement == target) {
+            return mid;
+        } else if (target < currentElement) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+
+    return -1;
+}
+    """
+  },
+  {
+    "method_name": "fibonacciSequenceMethod",
+    "documentation": """
+    Generates the Fibonacci sequence up to a given number of terms.
+
+    This function takes one parameter: n. The method first checks if the input is valid
+    (non-negative integer). If it's not, the method returns an empty array.
+    Otherwise, it generates and returns the Fibonacci sequence up to n terms.
+
+    Example:
+        fibonacciSequenceMethod(5) -> [0, 1, 1, 2, 3]
+        fibonacciSequenceMethod(8) -> [0, 1, 1, 2, 3, 5, 8, 13]
+
+    Time complexity: O(n).
+    Space complexity: O(1).
+
+    """
+    , 
+    "code": """
+int fibonacciSequenceMethod(int n) {
+    if (n < 0 || n != (int)sqrt(5) * ((sqrt(5) + 1. / 2.) * abs(n) - 1. / 4.) + 0.5) {
+        return {};
+    }
+
+    int a = 0, b = 1;
+    std::vector<int> sequence;
+
+    for (int i = 0; i < n; ++i) {
+        sequence.push_back(a);
+        int temp = a;
+        a = b;
+        b = temp + b;
+    }
+
+    return sequence;
+}
+    """
+  }
+]
+```
+
+--- Attempt 2 ---
+Error: After sanitation, still invalid JSON: Invalid control character at: line 4 column 26 (char 64)
+Response:
+```json
+[
+  {
+    "method_name": "swapValues",
+    "documentation": "/**
+     * Swaps the values of two integers.
+     *
+     * @param int a The first integer.
+     * @param int b The second integer.
+     * @return void No return value.
+     */
+    "code": "void swapValues(int &a, int &b) { int temp = a; a = b; b = temp; }"
+  },
+  {
+    "method_name": "maxOfArray",
+    "documentation": "/**
+     * Finds the maximum element in an array of integers.
+     *
+     * @param int arr The array to find the maximum in.
+     * @param int size The size of the array.
+     * @return int The maximum value in the array.
+     */
+    "code": "int maxOfArray(int arr[], int size) { int max = arr[0]; for (int i = 1; i < size; ++i) if (arr[i] > max) max = arr[i]; return max; }"
+  },
+  {
+    "method_name": "isPrime",
+    "documentation": "/**
+     * Checks if a number is prime.
+     *
+     * @param int num The number to check.
+     * @return bool True if the number is prime, false otherwise.
+     */
+    "code": "bool isPrime(int num) { if (num <= 1) return false; for (int i = 2; i * i <= num; ++i) if (num % i == 0) return false; return true; }"
+  }
+]
+```
+
+--- Attempt 1 ---
+Error: No valid method blocks found in response.
+Response:
+```json
+[
+  {
+    "method_name": "swapMethod",
+    "documentation": """
+/* 
+ * Swaps the values of two variables without using a temporary variable.
+ * 
+ * This method uses the XOR operator to swap the values in a single operation.
+ */
+""",
+    "code": """
+void swapMethod(int& a, int& b) {
+  a = a ^ b;
+  b = a ^ b;
+  a = a ^ b;
+}
+"""
+  },
+  {
+    "method_name": "findMaximum",
+    "documentation": """
+/* 
+ * Finds the maximum value in an array.
+ *
+ * This method uses the std::max_element function to find the maximum value.
+ */
+""",
+    "code": """
+int findMaximum(const int arr[], size_t size) {
+  return std::max_element(arr, arr + size) - arr;
+}
+"""
+  },
+  {
+    "method_name": "isPrime",
+    "documentation": """
+/* 
+ * Checks if a number is prime.
+ *
+ * This method checks for factors up to the square root of the number.
+ */
+""",
+    "code": """
+bool isPrime(int num) {
+  if (num <= 1) return false;
+  for (int i = 2; i * i <= num; ++i) {
+    if (num % i == 0) return false;
+  }
+  return true;
+}
+"""
+  }
+]
+```
+
+--- Attempt 2 ---
+Error: No valid method blocks found in response.
+Response:
+```json
+[
+  {
+    "method_name": "Factorial",
+    "documentation": """
+    Calculates the factorial of a given number.
+
+    Args:
+        n (int): The input number.
+    
+    Returns:
+        int: The factorial of n.
+    """,
+    "code": """
+int factorial(int n) {
+    if (n == 0 || n == 1) return 1;
+    return n * factorial(n - 1);
+}
+"""
+  },
+  {
+    "method_name": "Binary Search",
+    "documentation": """
+    Searches for an element in a sorted array.
+
+    Args:
+        arr (list): The input list.
+        target (int): The target number to search for.
+    
+    Returns:
+        int: The index of the target if found, -1 otherwise.
+    """,
+    "code": """
+int binary_search(int arr[], int low, int high, int target) {
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if (arr[mid] == target)
+            return mid;
+        else if (arr[mid] < target)
+            low = mid + 1;
+        else
+            high = mid - 1;
+    }
+    return -1;
+}
+"""
+  },
+  {
+    "method_name": "Reverse String",
+    "documentation": """
+    Reverses a given string.
+
+    Args:
+        str (str): The input string.
+    
+    Returns:
+        str: The reversed string.
+    """,
+    "code": """
+std::string reverse_string(std::string str) {
+    std::reverse(str.begin(), str.end());
+    return str;
+}
+"""
+  }
+]
+```
+
+--- Attempt 3 ---
+Error: No valid method blocks found in response.
+Response:
+```json
+[
+  {
+    "method_name": "findLongestSubstring",
+    "documentation": /*
+    Finds the longest substring in a given string that contains only unique characters.
+
+    Args:
+        s (str): The input string.
+    Returns:
+        str: The longest substring with unique characters.
+    */
+    "code": "
+    std::string findLongestSubstring(const std::string& s) {
+      int start = 0;
+      int maxLength = 0;
+      std::string maxStr = "";
+      std::unordered_set<char> seen;
+
+      for (int end = 0; end < s.length(); ++end) {
+        while (seen.find(s[end]) != seen.end()) {
+          seen.erase(s[start]);
+          start++;
+        }
+        seen.insert(s[end]);
+
+        if (end - start + 1 > maxLength) {
+          maxLength = end - start + 1;
+          maxStr = s.substr(start, maxLength);
+        }
+      }
+
+      return maxStr;
+    }
+  },
+  {
+    "method_name": "validateEmail",
+    "documentation": /*
+    Validates an email address.
+
+    Args:
+        email (str): The input email.
+    Returns:
+        bool: True if the email is valid, False otherwise.
+    */
+    "code": "
+    bool validateEmail(const std::string& email) {
+      std::regex pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$");
+      return std::regex_match(email, pattern);
+    }
+  },
+  {
+    "method_name": "binarySearch",
+    "documentation": /*
+    Performs a binary search on a sorted array to find a specific element.
+
+    Args:
+        arr (array): The input array.
+        target (int): The target element to search for.
+    Returns:
+        int: The index of the target element if found, -1 otherwise.
+    */
+    "code": "
+    int binarySearch(int arr[], int n, int target) {
+      int left = 0;
+      int right = n - 1;
+
+      while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (arr[mid] == target)
+          return mid;
+        else if (arr[mid] < target)
+          left = mid + 1;
+        else
+          right = mid - 1;
+      }
+
+      return -1;
+    }
+  }
+]
+```
+
+--- Attempt 1 ---
+Error: No valid method blocks found
+Response:
+```json
+[
+  {
+    "method_name": "MinimaxAlgorithm",
+    "documentation": /*
+     * This method implements the Minimax algorithm, a recursive algorithm used for decision making in games like chess.
+     * It evaluates all possible moves and their outcomes, then chooses the move that maximizes the chances of winning.
+     */
+    "code": """
+    int minimax(int depth, bool isMaximizingPlayer) {
+        if (depth == 0 || gameIsOver()) {
+            return evaluatePosition();
+        }
+        
+        if (isMaximizingPlayer) {
+            int bestScore = -INF;
+            for (int i = 0; i < 9; i++) {
+                makeMove(i);
+                int score = minimax(depth-1, false);
+                undoMove();
+                bestScore = max(bestScore, score);
+            }
+            return bestScore;
+        } else {
+            int bestScore = INF;
+            for (int i = 0; i < 9; i++) {
+                makeMove(i);
+                int score = minimax(depth-1, true);
+                undoMove();
+                bestScore = min(bestScore, score);
+            }
+            return bestScore;
+        }
+    }
+    """
+  },
+  {
+    "method_name": "DijkstraAlgorithm",
+    "documentation": /*
+     * This method implements the Dijkstra's algorithm, a graph search algorithm used to find the shortest path between nodes in a graph.
+     * It uses a priority queue to keep track of the nodes with the smallest distance from the source node.
+     */
+    "code": """
+    struct Node {
+        int dist;
+        char letter;
+        bool visited;
+    };
+
+    void dijkstra(char* graph[10][10], int src, char* dest) {
+        int numNodes = 10;
+        bool visited[numNodes] = {false};
+        priority_queue<Node> pq;
+
+        // Initialize the distance array and push the source node into the queue
+        for (int i = 0; i < numNodes; i++) {
+            dist[i] = INF;
+        }
+        dist[src] = 0;
+        pq.push({0, src, false});
+
+        while (!pq.empty()) {
+            Node node = pq.top();
+            pq.pop();
+
+            if (node.visited) continue;
+
+            visited[node.letter - 'a'] = true;
+
+            // Print the current shortest distance
+            printf("Shortest Distance: %d\n", dist[node.letter - 'a']);
+
+            // Update the distances of adjacent nodes
+            for (int i = 0; i < numNodes; i++) {
+                if (!visited[i] && graph[node.letter - 'a'][i] != 0) {
+                    int newDist = node.dist + graph[node.letter - 'a'][i];
+                    if (newDist < dist[i]) {
+                        dist[i] = newDist;
+                        pq.push({dist[i], i, false});
+                    }
+                }
+            }
+
+            // Mark the current node as visited
+            node.visited = true;
+        }
+    }
+    """
+  },
+  {
+    "method_name": "HeapSort",
+    "documentation": /*
+     * This method implements the Heap Sort algorithm, a comparison-based sorting algorithm used to sort elements in an array.
+     * It uses a heap data structure to keep track of the elements and repeatedly removes the largest (or smallest) element from the heap.
+     */
+    "code": """
+    void heapify(int arr[], int n, int i) {
+        int left = 2 * i + 1;
+        int right = 2 * i + 2;
+
+        if (left < n && arr[i] < arr[left]) {
+            swap(arr[i], arr[left]);
+            heapify(arr, n, left);
+        }
+
+        if (right < n && arr[left] < arr[right]) {
+            swap(arr[left], arr[right]);
+            heapify(arr, n, right);
+        }
+    }
+
+    void heapSort(int arr[], int n) {
+        for (int i = n / 2 - 1; i >= 0; --i)
+            heapify(arr, n, i);
+
+        for (int i = n - 1; i > 0; --i) {
+            swap(arr[i], arr[0]);
+            heapify(arr, i, 0);
+        }
+    }
+
+    void swap(int *a, int *b) {
+        int temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+    """
+  }
+]
+```
+
+--- Attempt 1 ---
+Error: No valid method blocks found
+Response:
+```json
+[
+  {
+    "method_name": "myMethod",
+    "documentation": """
+/**
+ * This function takes two integers as input and returns their product.
+ *
+ * @param int a First integer
+ * @param int b Second integer
+ * @return int Product of a and b
+ */
+int myMethod(int a, int b) {
+  return a * b;
+}
+""",
+    "code": """
+int myMethod(int a, int b) {
+  return a * b;
+}
+"""
+  }
+]
+```
+
+--- Attempt 2 ---
+Error: No valid method blocks found
+Response:
+```json
+[
+  {
+    "method_name": "maxSubArraySum",
+    "documentation": "/*\n\n* This function calculates the maximum subarray sum.\n* It uses Kadane's algorithm, which scans the array and at each step finds the maximum sum of the subarray ending at that position.\n* \n* Time complexity: O(n), where n is the number of elements in the array.\n* Space complexity: O(1).\n*/",
+    "code": "int maxSubArraySum(int* arr, int size)\n{\n    int max_so_far = INT_MIN;\n    int max_ending_here = 0;\n\n    for (int i = 0; i < size; i++)\n    {\n        max_ending_here = max_ending_here + arr[i];\n\n        if (max_so_far < max_ending_here)\n            max_so_far = max_ending_here;\n\n        if (max_ending_here < 0)\n            max_ending_here = 0;\n    }\n\n    return max_so_far;\n}"
+  }
+]
+```
+
+--- Attempt 3 ---
+Error: No valid method blocks found
+Response:
+```json
+[
+  {
+    "method_name": "minMaxValue",
+    "documentation": "/**
+ * Returns the minimum or maximum value in an iterable.
+ *
+ * @param iterable The input iterable.
+ * @param min Whether to return the minimum value (true) or the maximum value (false).
+ * @return The minimum or maximum value.
+ */",
+    "code": "template<typename T>
+T minMaxValue(const std::vector<T>& vec, bool min) {
+  if (!vec.empty()) {
+    auto it = vec.begin();
+    if (min) {
+      for (auto i = ++it; i != vec.end(); ++i) {
+        if (*i < *it)
+          it = i;
+      }
+    } else {
+      for (auto i = ++it; i != vec.end(); ++i) {
+        if (*i > *it)
+          it = i;
+      }
+    }
+  }
+  return min ? *it : !vec.empty() ? *vec.rbegin() : T();
+}"
+  },
+  {
+    "method_name": "swapValues",
+    "documentation": "/**
+ * Swaps the values of two variables.
+ *
+ * @param a The first variable.
+ * @param b The second variable.
+ */",
+    "code": "void swapValues(int& a, int& b) { std::swap(a, b); }"
+  }
+]
+```
+
+--- Attempt 5 ---
+Error: No valid method blocks found
+Response:
+```json
+[
+  {
+    "method_name": "swapElements",
+    "documentation": /** 
+ * Swaps the values of two elements in an array. This function does not modify the original array, but instead returns a new array with the swapped values.
+ *
+ * @param arr The input array containing two elements to be swapped.
+ * @return A new array with the swapped values.
+ */,
+    "code": /**
+ std::swap(arr[0], arr[1]);
+ return arr;
+ */
+  }
+]
+```
+
+--- Attempt 1 ---
+Error: JSON parsing failed: Expecting value: line 4 column 22 (char 62)
+Response:
+```json
+[
+  {
+    "method_name": "minMaxValues",
+    "documentation": /**
+     * Returns the minimum and maximum values in an array of integers.
+     *
+     * @param arr The input array of integers.
+     * @return A pair containing the minimum and maximum values.
+     */
+    "code": "int minVal = *std::min_element(arr, arr + sizeof(arr) / 4);
+    int maxVal = *std::max_element(arr, arr + sizeof(arr) / 4);
+    return std::make_pair(minVal, maxVal)"
+  }
+]
+```
+
+This C++ method finds the minimum and maximum values in an array of integers. It uses the `std::min_element` and `std::max_element` functions to find the smallest and largest elements in the array, respectively. The results are then returned as a pair using `std::make_pair`.
+
+--- Attempt 3 ---
+Error: No valid method blocks found
+Response:
+```json
+[
+  {
+    "method_name": "swapValues",
+    "documentation": "/*\n * Swaps the values of two variables.\n *\n * @param a The first variable to swap.\n * @param b The second variable to swap.\n */",
+    "code": "void swapValues(int &a, int &b) { std::swap(a, b); }"
+  }
+]
+```
